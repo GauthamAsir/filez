@@ -9,6 +9,8 @@ class FolderController extends GetxController {
 
   var path = ''.obs;
 
+  var sortVal = 0.obs;
+
   List<String> paths = List<String>().obs;
 
   addPath(String pathName) {
@@ -38,11 +40,10 @@ class FolderController extends GetxController {
         files.add(file);
       }
     }
-    sort();
   }
 
   sort() {
-    sortList(files, 0);
+    files = sortList(files, sortVal.value);
   }
 
   static List<FileSystemEntity> sortList(

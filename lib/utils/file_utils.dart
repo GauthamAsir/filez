@@ -3,6 +3,15 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 
 class FileUtils {
+  static List sortList = [
+    "File name (A to Z)",
+    "File name (Z to A)",
+    "Date (oldest first)",
+    "Date (newest first)",
+    "Size (largest first)",
+    "Size (Smallest first)",
+  ];
+
   /// Convert Byte to KB, MB, GB, TB .......
   static String formatBytes(bytes, decimals) {
     if (bytes == 0) return "0.0 KB";

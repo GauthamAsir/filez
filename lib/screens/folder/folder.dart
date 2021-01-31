@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:filez/screens/folder/components/dir_item.dart';
 import 'package:filez/screens/folder/components/file_item.dart';
 import 'package:filez/screens/folder/components/folder_controller.dart';
+import 'package:filez/screens/folder/components/sort_bottom_sheet.dart';
 import 'package:filez/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -25,7 +26,6 @@ class Folder extends StatefulWidget {
 }
 
 class _FolderState extends State<Folder> with WidgetsBindingObserver {
-
   List<FileSystemEntity> files = List();
 
   final folderController = Get.put(FolderController());
@@ -161,6 +161,31 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
               ),
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => SortBottomSheet(
+                    sortVal: folderController.sortVal.value,
+                    onTap: (index) {
+                      folderController.sortVal.value = index;
+                      folderController.sort();
+                      Get.back();
+                      setState(() {});
+                    },
+                  ),
+                ).then((v) {
+                  // getFiles();
+                });
+              },
+              tooltip: Strings.sortBy,
+              icon: Icon(
+                Icons.sort,
+                color: Colors.black87,
+              ),
+            ),
+          ],
         ),
         body: Container(
           height: Get.size.height,
@@ -196,17 +221,17 @@ class _FolderState extends State<Folder> with WidgetsBindingObserver {
                   FileSystemEntity file = controller.files[index];
                   return file.toString().split(":")[0] == "Directory"
                       ? DirectoryItem(
-                      file: file,
-                      onTap: () {
-                        folderController.addPath(file.path);
+                          file: file,
+                          onTap: () {
+                            folderController.addPath(file.path);
                             folderController.getFiles(file.path);
                             folderController.setPath(file.path);
                           },
-                      onToolsTap: (selectedTool) {})
+                          onToolsTap: (selectedTool) {})
                       : FileItem(
-                    file: file,
-                    onToolsTap: (int) {},
-                  );
+                          file: file,
+                          onToolsTap: (int) {},
+                        );
                 },
               );
             },

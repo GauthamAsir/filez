@@ -21,4 +21,6 @@ class Strings {
   static const permissionPermanentlyDenied =
       'Storage Permission is Permanently Denied';
   static const grantPermissionToContinue = 'Grant Permission to Continue';
+
+  static const sortBy = 'Sort by';
 }
