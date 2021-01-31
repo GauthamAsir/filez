@@ -1,9 +1,10 @@
 import 'package:filez/style/theme_controller.dart';
 import 'package:filez/utils/screen_size.dart';
 import 'package:filez/utils/strings.dart';
-import 'package:filez/widgets/settings_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'file:///D:/000_OLD_FILES/Android%20Studio%20Projects/filez/lib/screens/settings/components/settings_tile.dart';
 
 class Settings extends StatefulWidget {
   @override

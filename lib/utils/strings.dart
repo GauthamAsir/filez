@@ -14,4 +14,11 @@ class Strings {
   static const rename = 'Rename';
   static const delete = 'Delete';
   static const noItemsFound = 'No Items Found';
+
+  static const permissionDenied = 'Storage Permission is Denied';
+  static const grantPermission = 'Grant Permission';
+  static const openSettings = 'Open Settings';
+  static const permissionPermanentlyDenied =
+      'Storage Permission is Permanently Denied';
+  static const grantPermissionToContinue = 'Grant Permission to Continue';
 }

@@ -1,6 +1,5 @@
 import 'package:filez/screens/browse/browse.dart';
 import 'package:filez/screens/settings/settings.dart';
-import 'package:filez/style/theme_controller.dart';
 import 'package:filez/utils/strings.dart';
 import 'package:filez/utils/utils.dart';
 import 'package:flutter/material.dart';
