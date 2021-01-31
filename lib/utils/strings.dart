@@ -11,5 +11,7 @@ class Strings {
   static const light = 'Light';
   static const dark = 'Dark';
   static const system = 'System';
+  static const device = 'Device';
+  static const sdCard = 'SD Card';
 
 }

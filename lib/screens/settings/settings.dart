@@ -1,7 +1,6 @@
 import 'package:filez/style/theme_controller.dart';
 import 'package:filez/utils/screen_size.dart';
 import 'package:filez/utils/strings.dart';
-import 'package:filez/utils/utils.dart';
 import 'package:filez/widgets/settings_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

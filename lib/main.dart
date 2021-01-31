@@ -1,4 +1,4 @@
-import 'package:filez/screens/home/home.dart';
+import 'package:filez/widgets/check_permission.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.yellow.shade800,
           accentColor: Colors.black),
       themeMode: ThemeController.to.themeMode,
-      home: Home(),
+      home: CheckPermission(),
     );
   }
 }
