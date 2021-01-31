@@ -1,12 +1,13 @@
-import 'package:filez/screens/home/home.dart';
-import 'package:filez/style/theme_controller.dart';
-import 'package:filez/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Utils {
   Utils._();
+
+  static TextStyle getFolderTextStyle() {
+    return Get.textTheme.subtitle1;
+  }
 
   static Color getBackgroundColor() {
     if (Theme.of(Get.context).brightness == Brightness.dark)

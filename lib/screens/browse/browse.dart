@@ -1,4 +1,5 @@
 import 'package:filez/screens/browse/components/browse_controller.dart';
+import 'package:filez/screens/folder/folder.dart';
 import 'package:filez/utils/file_utils.dart';
 import 'package:filez/utils/screen_size.dart';
 import 'package:filez/utils/strings.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Browse extends StatefulWidget {
   @override
@@ -14,8 +14,6 @@ class Browse extends StatefulWidget {
 }
 
 class _BrowseState extends State<Browse> {
-  final browseController = Get.put(BrowseController());
-
   @override
   void initState() {
     super.initState();
@@ -23,6 +21,8 @@ class _BrowseState extends State<Browse> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(BrowseController());
+
     return Scaffold(
       body: Column(
         children: [
@@ -47,29 +47,16 @@ class _BrowseState extends State<Browse> {
                   shrinkWrap: true,
                   padding: EdgeInsets.only(top: 20),
                   itemBuilder: (context, index) {
-                    double percent;
-
-                    // print('Test ${controller..usedSpace}');
-
-                    if (controller.usedSpace != null &&
-                        controller.totalSpace != null &&
-                        controller.usedSpaceSD != null &&
-                        controller.totalSpaceSD != null) {
-                      percent = index == 0
-                          ? double.parse((controller.usedSpace /
-                                      controller.totalSpace *
-                                      100)
-                                  .toStringAsFixed(0)) /
-                              100
-                          : double.parse((controller.usedSpaceSD /
-                                      controller.totalSpaceSD *
-                                      100)
-                                  .toStringAsFixed(0)) /
-                              100;
-                    }
+                    String path = controller.availableStorage[index].path
+                        .split("Android")[0];
 
                     return ListTile(
-                        onTap: () async {},
+                        onTap: () {
+                          Get.to(Folder(
+                              title:
+                                  index == 0 ? Strings.device : Strings.sdCard,
+                              path: path));
+                        },
                         contentPadding: EdgeInsets.only(right: 20),
                         leading: Container(
                           height: 40,
@@ -88,13 +75,13 @@ class _BrowseState extends State<Browse> {
                                   ? Feather.smartphone
                                   : Icons.sd_storage,
                               color:
-                                  index == 0 ? Colors.lightBlue : Colors.orange,
+                              index == 0 ? Colors.lightBlue : Colors.orange,
                             ),
                           ),
                         ),
                         title: Container(
                           margin:
-                              EdgeInsets.only(right: Sizes.marginHorizontal),
+                          EdgeInsets.only(right: Sizes.marginHorizontal),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -105,12 +92,12 @@ class _BrowseState extends State<Browse> {
                               ),
                               Text(
                                 index == 0
-                                    ? "${FileUtils.formatBytes(controller.usedSpace, 2)} "
-                                        "used of ${FileUtils.formatBytes(controller.totalSpace, 2)}"
-                                    : "${FileUtils.formatBytes(controller.usedSpaceSD, 2)} "
-                                        "used of ${FileUtils.formatBytes(controller.totalSpaceSD, 2)}",
+                                    ? "${FileUtils.formatBytes(controller.usedSpace ?? 0, 2)} "
+                                        "used of ${FileUtils.formatBytes(controller.totalSpace ?? 0, 2)}"
+                                    : "${FileUtils.formatBytes(controller.usedSpaceSD ?? 0, 2)} "
+                                        "used of ${FileUtils.formatBytes(controller.totalSpaceSD ?? 0, 2)}",
                                 style: Get.textTheme.subtitle2
-                                .copyWith(fontWeight: FontWeight.w400),
+                                    .copyWith(fontWeight: FontWeight.w400),
                               ),
                             ],
                           ),
@@ -121,13 +108,15 @@ class _BrowseState extends State<Browse> {
                               Radius.circular(10),
                             ),
                           ),
-                          child: LinearPercentIndicator(
-                            padding: EdgeInsets.all(0),
-                            backgroundColor: Colors.grey[300],
-                            percent: percent ?? 0.0,
-                            progressColor:
-                                index == 0 ? Colors.lightBlue : Colors.orange,
-                          ),
+                          child: LinearProgressIndicator(
+                              value: index == 0
+                                  ? controller.percent ?? 0
+                                  : controller.percentSD ?? 0,
+                              backgroundColor: Colors.grey.shade300,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  index == 0
+                                      ? Colors.lightBlue
+                                      : Colors.orange)),
                         ));
                   });
             },

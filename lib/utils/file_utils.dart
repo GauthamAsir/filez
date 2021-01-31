@@ -1,7 +1,8 @@
 import 'dart:math';
 
-class FileUtils {
+import 'package:intl/intl.dart';
 
+class FileUtils {
   /// Convert Byte to KB, MB, GB, TB .......
   static String formatBytes(bytes, decimals) {
     if (bytes == 0) return "0.0 KB";
@@ -12,4 +13,23 @@ class FileUtils {
     return (((bytes / pow(k, i)).toStringAsFixed(dm)) + ' ' + sizes[i]);
   }
 
+  static String formatTime(String iso) {
+    DateTime date = DateTime.parse(iso);
+    DateTime now = DateTime.now();
+    DateTime yDay = DateTime.now().subtract(Duration(days: 1));
+    DateTime dateFormat = DateTime.parse(
+        "${date.year}-${date.month.toString().padLeft(2, "0")}-${date.day.toString().padLeft(2, "0")}T00:00:00.000Z");
+    DateTime today = DateTime.parse(
+        "${now.year}-${now.month.toString().padLeft(2, "0")}-${now.day.toString().padLeft(2, "0")}T00:00:00.000Z");
+    DateTime yesterday = DateTime.parse(
+        "${yDay.year}-${yDay.month.toString().padLeft(2, "0")}-${yDay.day.toString().padLeft(2, "0")}T00:00:00.000Z");
+
+    if (dateFormat == today) {
+      return "Today ${DateFormat("HH:mm").format(DateTime.parse(iso))}";
+    } else if (dateFormat == yesterday) {
+      return "Yesterday ${DateFormat("HH:mm").format(DateTime.parse(iso))}";
+    } else {
+      return "${DateFormat("MMM dd, HH:mm").format(DateTime.parse(iso))}";
+    }
+  }
 }

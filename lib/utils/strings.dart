@@ -1,5 +1,3 @@
-import 'package:filez/screens/settings/settings.dart';
-
 class Strings {
 
   Strings._();
@@ -13,5 +11,7 @@ class Strings {
   static const system = 'System';
   static const device = 'Device';
   static const sdCard = 'SD Card';
-
+  static const rename = 'Rename';
+  static const delete = 'Delete';
+  static const noItemsFound = 'No Items Found';
 }

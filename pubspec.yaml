@@ -41,7 +41,11 @@ dependencies:
 
   path_provider:
 
-  percent_indicator:
+  path:
+
+  mime_type:
+
+  intl:
 
 dev_dependencies:
   flutter_test:
