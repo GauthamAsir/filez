@@ -7,15 +7,22 @@ import 'package:path/path.dart';
 class FolderController extends GetxController {
   List<FileSystemEntity> files = List<FileSystemEntity>().obs;
 
+  var path = ''.obs;
+
   List<String> paths = List<String>().obs;
 
   addPath(String pathName) {
     paths.add(pathName);
   }
 
+  setPath(String path) {
+    this.path.value = path;
+  }
+
   removeLastPath() {
     paths.removeLast();
-    getFiles(paths.last);
+    path.value = paths.last;
+    getFiles(path.value);
   }
 
   getFiles(String path, {bool showHidden = true}) async {
