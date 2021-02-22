@@ -4,7 +4,7 @@ import 'package:filez/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'file:///D:/000_OLD_FILES/Android%20Studio%20Projects/filez/lib/screens/settings/components/settings_tile.dart';
+import 'components/settings_tile.dart';
 
 class Settings extends StatefulWidget {
   @override

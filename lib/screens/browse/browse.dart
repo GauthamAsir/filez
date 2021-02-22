@@ -75,13 +75,13 @@ class _BrowseState extends State<Browse> {
                                   ? Feather.smartphone
                                   : Icons.sd_storage,
                               color:
-                              index == 0 ? Colors.lightBlue : Colors.orange,
+                                  index == 0 ? Colors.lightBlue : Colors.orange,
                             ),
                           ),
                         ),
                         title: Container(
                           margin:
-                          EdgeInsets.only(right: Sizes.marginHorizontal),
+                              EdgeInsets.only(right: Sizes.marginHorizontal),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
